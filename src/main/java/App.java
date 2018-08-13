@@ -23,10 +23,10 @@ public class App {
 
 		MongoClientOptions options = MongoClientOptions.builder()
 		        .addConnectionPoolListener(new TestConnectionPoolListener())
-		        .connectTimeout(10000)
+		        .connectTimeout(20000)
 		        .maxConnectionIdleTime(0)		//A zero value indicates no limit to the life time.
 		        .maxConnectionLifeTime(0)		//A zero value indicates no limit to the life time.
-		        .maxWaitTime(15000)
+		        .maxWaitTime(120000)				//Sets the maximum time that a thread will block waiting for a connection.
 		        .build();
 
 		@SuppressWarnings("resource")
@@ -50,9 +50,9 @@ public class App {
 			catch (MongoException me) 
 			{
 				long diff = System.currentTimeMillis() - startTime;
-				System.err.println(me + "$$$ time took=" + diff);
+				System.err.println(me + " $$$ iteration " + i + ", time took=" + diff);
 			}
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		}	
 		
 
