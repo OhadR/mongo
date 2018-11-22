@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.bson.Document;
 
@@ -16,10 +18,15 @@ public class App {
 	private static final String EVENTS_COLL_NAME = "events";
 	private static final String FORENSIC_DB_NAME = "forensic";
 
+	private static PropertiesLoader propertiesLoader = new PropertiesLoader();
+	
 	public static void main(String[] args) throws InterruptedException {
 
 		//credentials:
-		MongoCredential credential = MongoCredential.createCredential("ayala", "admin", "q1w2e3r4!".toCharArray());
+		String mongoUser = propertiesLoader.getProperty( "mongo.user" );
+		String mongoPassword = propertiesLoader.getProperty( "mongo.pwd" );
+//		mongo.db.name=forensic
+		MongoCredential credential = MongoCredential.createCredential(mongoUser, "admin", mongoPassword.toCharArray());
 
 		MongoClientOptions options = MongoClientOptions.builder()
 		        .addConnectionPoolListener(new TestConnectionPoolListener())
@@ -29,9 +36,19 @@ public class App {
 		        .maxWaitTime(120000)				//Sets the maximum time that a thread will block waiting for a connection.
 		        .build();
 
+		String seedsAsString = propertiesLoader.getProperty( "mongo.nodes" );
+        String[] splittedSeeds = seedsAsString.split(",");
+        List<ServerAddress> seeds = new ArrayList<>();
+        for(String seed : splittedSeeds)
+        {
+            String[] hostPort = seed.split(":");
+            ServerAddress serverAddress = new ServerAddress( hostPort[0], Integer.parseInt(hostPort[1]) );
+            seeds.add(serverAddress);
+        }
+
 		@SuppressWarnings("resource")
 		MongoClient mongoClient = new MongoClient(
-				new ServerAddress("localhost", 27017)		//replica-set
+				seeds								//replica-set
 		        ,Arrays.asList(credential)
 		        ,options
 		        );
