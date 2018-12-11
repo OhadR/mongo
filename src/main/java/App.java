@@ -18,7 +18,7 @@ public class App {
 	private static final String EVENTS_COLL_NAME = "events";
 	private static final String FORENSIC_DB_NAME = "forensic";
 
-	private static PropertiesLoader propertiesLoader = new PropertiesLoader();
+	private static PropertiesLoader propertiesLoader = PropertiesLoader.getInstance();
 	
 	public static void main(String[] args) throws InterruptedException {
 

@@ -5,8 +5,14 @@ import java.util.Properties;
 public class PropertiesLoader 
 {
 	private Properties prop = new Properties();
+	private static PropertiesLoader instance = new PropertiesLoader();
 
-	public PropertiesLoader()
+	public static PropertiesLoader getInstance()
+	{
+		return instance;
+	}
+	
+	private PropertiesLoader()
 	{
 		loadProperties();
 	}

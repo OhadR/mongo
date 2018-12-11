@@ -22,3 +22,6 @@ Socket timeout is the number of milliseconds a send or receive on a socket can t
 
 Number of ms a thread will wait for a connection to become available on the connection pool, and raises an exception if this does not happen in time. Keep default.
 
+## How to run this app?
+
+currently - from the debugger (IDE).
