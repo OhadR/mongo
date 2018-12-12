@@ -1,8 +1,13 @@
+package com.ohadr.mongodb;
+
 import java.io.File;
+import java.util.List;
 
 import org.bson.Document;
 
+import com.cellebrite.analytics.repository.mongodb.MongoServerDetails;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientWrapper;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -33,6 +38,10 @@ public class App {
 				long diff = System.currentTimeMillis() - startTime;
 				System.err.println(me + " $$$ iteration " + i + ", time took=" + diff);
 			}
+			
+			List<MongoServerDetails> mongoStatus = HealthCheck.checkMongoHealth();
+			System.out.println(mongoStatus);
+			
 			Thread.sleep(3000);
 		}	
 		

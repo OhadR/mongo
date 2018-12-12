@@ -1,3 +1,5 @@
+package com.mongodb;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +9,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.connection.Cluster;
+import com.ohadr.mongodb.PropertiesLoader;
 
 public class MongoClientWrapper {
 
@@ -51,7 +55,15 @@ public class MongoClientWrapper {
 		        ,options
 		        );
 		
-		return mongoClient;		
+		return mongoClient;
 	}
-	
+
+	/**
+	 * in order to publish the 'cluster' member of the client, we must reside at org.mongodb as the method is package-protected.
+	 * @return the cluster of this client
+	 */
+	public static Cluster getMongoCluster()
+	{
+		return mongoClient.getCluster();
+	}
 }

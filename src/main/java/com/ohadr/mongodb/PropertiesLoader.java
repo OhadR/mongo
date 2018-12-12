@@ -1,3 +1,5 @@
+package com.ohadr.mongodb;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
