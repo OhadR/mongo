@@ -54,4 +54,8 @@ public class PropertiesLoader
 		return prop.getProperty( key ); 
 	}
 
+	public int getIntProperty(String key)
+	{
+		return Integer.valueOf( prop.getProperty( key ) ); 
+	}
 }

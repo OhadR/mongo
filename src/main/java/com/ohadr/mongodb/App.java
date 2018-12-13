@@ -16,10 +16,12 @@ public class App {
 
 	private static final String EVENTS_COLL_NAME = "events";
 	private static final String FORENSIC_DB_NAME = "forensic";
+	private static PropertiesLoader propertiesLoader = PropertiesLoader.getInstance();
 
 	
 	public static void main(String[] args) throws InterruptedException {
 
+		int interval = propertiesLoader.getIntProperty( "interval" );
         MongoClient mongoClient = MongoClientWrapper.getMongoClient();
         MongoDatabase database = mongoClient.getDatabase(FORENSIC_DB_NAME);
 		
@@ -42,7 +44,7 @@ public class App {
 			List<MongoServerDetails> mongoStatus = HealthCheck.checkMongoHealth();
 			System.out.println(mongoStatus);
 			
-			Thread.sleep(3000);
+			Thread.sleep(interval);
 		}	
 		
 
