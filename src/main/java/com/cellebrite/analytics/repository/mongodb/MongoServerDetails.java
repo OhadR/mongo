@@ -23,6 +23,30 @@ public class MongoServerDetails {
 		
 	}
 
+	public ServerAddress getAddress() {
+		return address;
+	}
+
+	public void setAddress(ServerAddress address) {
+		this.address = address;
+	}
+
+	public ServerType getType() {
+		return type;
+	}
+
+	public void setType(ServerType type) {
+		this.type = type;
+	}
+
+	public ServerConnectionState getState() {
+		return state;
+	}
+
+	public void setState(ServerConnectionState state) {
+		this.state = state;
+	}
+
 	
 	
 }
