@@ -10,6 +10,11 @@
             <artifactId>mongodb-driver</artifactId>
             <version>3.5.0</version>
         </dependency>
+        <dependency>
+			<groupId>com.ohadr</groupId>
+			<artifactId>ohadr.commons</artifactId>
+			<version>0.3</version>
+        </dependency>
   
   </dependencies>
 </project>

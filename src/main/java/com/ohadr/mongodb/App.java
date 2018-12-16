@@ -11,6 +11,7 @@ import com.mongodb.MongoClientWrapper;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.ohadr.common.utils.JsonUtils;
 
 public class App {
 
@@ -20,7 +21,9 @@ public class App {
 
 	
 	public static void main(String[] args) throws InterruptedException {
-
+		
+		getJsonFromMongoServerDetails();
+		
 		int interval = propertiesLoader.getIntProperty( "interval" );
         MongoClient mongoClient = MongoClientWrapper.getMongoClient();
         MongoDatabase database = mongoClient.getDatabase(FORENSIC_DB_NAME);
@@ -50,4 +53,11 @@ public class App {
 
 	}
 
+	public static void getJsonFromMongoServerDetails()
+	{
+		List<MongoServerDetails> mongoStatus = HealthCheck.checkMongoHealth();
+		String json = JsonUtils.convertToJson(mongoStatus);
+		System.out.println(json);
+		
+	}
 }
